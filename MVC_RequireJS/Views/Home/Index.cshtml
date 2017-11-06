@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div id="homeIndexContainer">
+    <h2>Tasks</h2>    
+    <div>
+        <table style="width:100%">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Date/Time</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: tasks">
+                <tr>
+                    <td data-bind="text: Title"></td>
+                    <td data-bind="text: TaskDate"></td>
+                    <td data-bind="text: Status"></td>
+                    <td></td>
+                </tr>
+            </tbody>
+           
+            <tfoot data-bind="with: newTask, block: blockNewTask">
+                <tr data-bind="visible: !$parent.newTaskVisible()">
+                    <td colspan="4">
+                        <button class="link-btn" style="font-weight:bold;" data-bind="click: $parent.showNewTask" title="Add new task">+</button>
+                    </td>
+                </tr>
+                <tr class="new-list-item" data-bind="fadeVisible: $parent.newTaskVisible()">
+                    <td><input type="text"  class="form-control" data-bind="value: Title, hasFocus: $parent.newTaskVisible()" placeholder="Title" /></td>
+                    <td><input type="text"  class="form-control" data-bind="value: TaskDate" placeholder="Date of task" /></td>
+                    <td><textarea class="form-control" data-bind="value: Description" placeholder="Description"></textarea></td>
+                    <td>
+                        <button class="btn btn-primary" data-bind="click: $parent.addNew, disable: !$parent.newTask.isValid()">Add</button>
+                        <button class="btn btn-default" data-bind="click: $parent.cancelNewTask">Cancel</button>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+</div>
